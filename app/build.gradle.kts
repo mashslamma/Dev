@@ -16,18 +16,8 @@ android {
         versionName = "1.2.0"
     }
 
-    signingConfigs {
-        create("debug") {
-            storeFile = file("debug.keystore")
-            storePassword = "android"
-            keyAlias = "androiddebugkey"
-            keyPassword = "android"
-        }
-    }
-
     buildTypes {
         debug {
-            signingConfig = signingConfigs.getByName("debug")
         }
         release {
             isMinifyEnabled = false

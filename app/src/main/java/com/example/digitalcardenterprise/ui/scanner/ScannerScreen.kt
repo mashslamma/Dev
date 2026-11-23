@@ -80,7 +80,7 @@ fun ScannerScreen(onBack: () -> Unit, onScanned: (String) -> Unit = {}) {
                     Text(text.take(400), maxLines = 7, style = MaterialTheme.typography.bodyMedium)
                     Spacer(Modifier.height(12.dp))
                     Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                        Button(onClick = { try { if (text.startsWith("BEGIN:VCARD")) { val uri = ImageHelper.saveTextToCache(context, text, "scanned_contact.vcf") ?: return; val intent = Intent(Intent.ACTION_VIEW).apply { setDataAndType(uri, "text/x-vcard"); addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) }; context.startActivity(intent) } else { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(text)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }) } catch (_: Exception) {} } }) { Text(stringResource(R.string.scanner_open)) }
+                        Button(onClick = { try { if (text.startsWith("BEGIN:VCARD")) {                                     val uri = ImageHelper.saveTextToCache(context, text, "scanned_contact.vcf") ?: return@Button val intent = Intent(Intent.ACTION_VIEW).apply { setDataAndType(uri, "text/x-vcard"); addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION) }; context.startActivity(intent) } else { context.startActivity(Intent(Intent.ACTION_VIEW, Uri.parse(text)).apply { addFlags(Intent.FLAG_ACTIVITY_NEW_TASK) }) } catch (_: Exception) {} } }) { Text(stringResource(R.string.scanner_open)) }
                         OutlinedButton(onClick = { scanned = null; locked = false }) { Text(stringResource(R.string.scanner_again)) }
                     }
                 }

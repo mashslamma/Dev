@@ -117,11 +117,11 @@ fun ProfileScreen(
         }
     }
 
-    @Composable private fun Section(title: String) {
+    @Composable fun Section(title: String) {
         Text(text = title, style = MaterialTheme.typography.titleMedium, modifier = Modifier.fillMaxWidth().padding(top = 20.dp, bottom = 4.dp))
     }
 
-    @Composable private fun Field(label: String, value: String, onChange: (String) -> Unit) {
+    @Composable fun Field(label: String, value: String, onChange: (String) -> Unit) {
         OutlinedTextField(value, onChange, label = { Text(label) }, singleLine = true, modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp))
     }
 }

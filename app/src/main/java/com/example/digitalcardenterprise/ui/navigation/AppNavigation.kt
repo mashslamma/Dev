@@ -6,6 +6,7 @@ import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -17,10 +18,13 @@ import com.example.digitalcardenterprise.ui.profile.ProfileScreen
 import com.example.digitalcardenterprise.ui.qr.QrScreen
 import com.example.digitalcardenterprise.ui.scanner.ScannerScreen
 import com.example.digitalcardenterprise.ui.settings.SettingsScreen
+import com.example.digitalcardenterprise.util.ImageHelper
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.SetOptions
+import android.content.Intent
+import android.net.Uri
 
 object Routes {
     const val AUTH = "auth"
@@ -69,7 +73,26 @@ fun AppNav() {
         composable(Routes.AUTH) { AuthScreen(onSuccess = { user = auth.currentUser }) }
         composable(Routes.PROFILE) {
             val p = profile
-            if (p == null) Loading() else ProfileScreen(profile = p, onProfileChange = { saveProfile(it) }, onOpenQr = { nav.navigate(Routes.QR) }, onOpenScanner = { nav.navigate(Routes.SCANNER) }, onOpenSettings = { nav.navigate(Routes.SETTINGS) }, onOpenAdmin = { if (p.role == "admin") nav.navigate(Routes.ADMIN) }, onLogout = { auth.signOut() }, onExportVcf = {})
+            if (p == null) Loading() else ProfileScreen(
+                profile = p,
+                onProfileChange = { saveProfile(it) },
+                onOpenQr = { nav.navigate(Routes.QR) },
+                onOpenScanner = { nav.navigate(Routes.SCANNER) },
+                onOpenSettings = { nav.navigate(Routes.SETTINGS) },
+                onOpenAdmin = { if (p.role == "admin") nav.navigate(Routes.ADMIN) },
+                onLogout = { auth.signOut() },
+                onExportVcf = {
+                    val ctx = LocalContext.current
+                    val vcard = com.example.digitalcardenterprise.util.VCardGenerator.generate(p)
+                    val uri = ImageHelper.saveTextToCache(ctx, vcard, "contact_${p.uid}.vcf") ?: return@composable
+                    val intent = Intent(Intent.ACTION_SEND).apply {
+                        type = "text/vcard"
+                        putExtra(Intent.EXTRA_STREAM, uri)
+                        addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+                    }
+                    ctx.startActivity(Intent.createChooser(intent, ctx.getString(R.string.qr_vcf)))
+                }
+            )
         }
         composable(Routes.QR) { val p = profile; if (p == null) Loading() else QrScreen(profile = p, onBack = { nav.popBackStack() }) }
         composable(Routes.SCANNER) { ScannerScreen(onBack = { nav.popBackStack() }) }
