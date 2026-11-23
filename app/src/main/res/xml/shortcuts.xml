@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shortcuts xmlns:android="http://schemas.android.com/apk/res/android">
+    <shortcut
+        android:shortcutId="show_qr"
+        android:enabled="true"
+        android:icon="@mipmap/ic_launcher"
+        android:shortcutShortLabel="Моя визитка"
+        android:shortcutLongLabel="Показать QR-код визитки"
+        android:shortcutDisabledMessage="Недоступно">
+        <intent
+            android:action="android.intent.action.VIEW"
+            android:targetPackage="com.example.digitalcardenterprise"
+            android:targetClass="com.example.digitalcardenterprise.MainActivity" />
+        <categories android:name="android.shortcut.conversation" />
+    </shortcut>
+    <shortcut
+        android:shortcutId="scan_qr"
+        android:enabled="true"
+        android:icon="@drawable/ic_scanner"
+        android:shortcutShortLabel="Сканировать"
+        android:shortcutLongLabel="Сканировать чужую визитку"
+        android:shortcutDisabledMessage="Недоступно">
+        <intent
+            android:action="com.example.digitalcardenterprise.SCAN_QR"
+            android:targetPackage="com.example.digitalcardenterprise"
+            android:targetClass="com.example.digitalcardenterprise.MainActivity" />
+    </shortcut>
+</shortcuts>

@@ -26,6 +26,7 @@ import coil.compose.AsyncImage
 import com.example.digitalcardenterprise.R
 import com.example.digitalcardenterprise.data.UserProfile
 import com.example.digitalcardenterprise.util.ImageHelper
+import com.example.digitalcardenterprise.util.LanguageManager.Lang
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -36,6 +37,13 @@ fun ProfileScreen(
     onOpenScanner: () -> Unit,
     onOpenSettings: () -> Unit,
     onOpenAdmin: () -> Unit,
+    onOpenWebCard: () -> Unit,
+    onOpenQrTemplate: () -> Unit,
+    onOpenBiometric: () -> Unit,
+    onOpenScanHistory: () -> Unit,
+    onOpenTeam: () -> Unit,
+    onOpenContactImport: () -> Unit,
+    onOpenAnalyticsExport: () -> Unit,
     onLogout: () -> Unit,
     onExportVcf: () -> Unit
 ) {
@@ -111,6 +119,21 @@ fun ProfileScreen(
             OutlinedButton(onClick = onOpenScanner, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.profile_scan)) }
             Spacer(Modifier.height(8.dp))
             OutlinedButton(onClick = onExportVcf, modifier = Modifier.fillMaxWidth()) { Text(stringResource(R.string.profile_export_vcf)) }
+            Spacer(Modifier.height(8.dp))
+            OutlinedButton(onClick = onOpenWebCard, modifier = Modifier.fillMaxWidth()) { Text("Веб-визитка") }
+            Spacer(Modifier.height(8.dp))
+            OutlinedButton(onClick = onOpenQrTemplate, modifier = Modifier.fillMaxWidth()) { Text("Дизайн QR") }
+            Spacer(Modifier.height(8.dp))
+            OutlinedButton(onClick = onOpenBiometric, modifier = Modifier.fillMaxWidth()) { Text("Биометрия") }
+            Spacer(Modifier.height(8.dp))
+            OutlinedButton(onClick = onOpenScanHistory, modifier = Modifier.fillMaxWidth()) { Text("История сканов") }
+            Spacer(Modifier.height(8.dp))
+            if (profile.role == "admin") {
+                OutlinedButton(onClick = onOpenTeam, modifier = Modifier.fillMaxWidth()) { Text("Команда") }
+                Spacer(Modifier.height(8.dp))
+                OutlinedButton(onClick = onOpenAnalyticsExport, modifier = Modifier.fillMaxWidth()) { Text("Экспорт аналитики") }
+            }
+            OutlinedButton(onClick = onOpenContactImport, modifier = Modifier.fillMaxWidth()) { Text("Импорт контактов") }
 
             if (!profile.isComplete()) { Spacer(Modifier.height(8.dp)); Text(text = stringResource(R.string.profile_fill_required), color = MaterialTheme.colorScheme.error, style = MaterialTheme.typography.bodySmall) }
             Spacer(Modifier.height(32.dp))

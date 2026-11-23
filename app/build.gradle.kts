@@ -69,5 +69,6 @@ dependencies {
     implementation("io.coil-kt:coil-compose:2.6.0")
     implementation("androidx.biometric:biometric:1.1.0")
     implementation("androidx.core:core-remoteviews:1.0.0")
+    implementation("androidx.core:core-google-shortcuts:1.0.1")
     implementation("androidx.work:work-runtime-ktx:2.10.0")
 }
