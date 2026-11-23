@@ -1,293 +1,147 @@
-# QR Card Pro — Цифровая визитка для компаний
+# QR Card Pro — Цифровая визитка нового поколения
 
 ## 📖 Оглавление / Table of Contents
 
 | Русский | English |
 |---------|---------|
-| [О проекте](#-о-проекте) | [About](#-about) |
+| [О приложении](#-о-приложении) | [About](#-about) |
 | [Возможности](#-возможности) | [Features](#-features) |
-| [Технологический стек](#-технологический-стек) | [Tech Stack](#-tech-stack) |
-| [Структура проекта](#-структура-проекта) | [Project Structure](#-project-structure) |
-| [Установка и запуск](#-установка-и-запуск) | [Installation & Run](#-installation--run) |
-| [Настройка Firebase](#-настройка-firebase) | [Firebase Setup](#-firebase-setup) |
-| [Сборка и релиз](#-сборка-и-релиз) | [Build & Release](#-build--release) |
-| [Корпоративная версия](#-корпоративная-версия) | [Enterprise Version](#-enterprise-version) |
+| [Версии приложения](#-версии-приложения) | [App Versions](#-app-versions) |
+| [Для кого приложение](#-для-кого-приложение) | [Who is it for](#-who-is-it-for) |
 | [Лицензия](#-лицензия) | [License](#-license) |
 
 ---
 
-## 🚀 О проекте / About
+## 🚀 О приложении / About
 
 ### Русский
-**QR Card Pro** — Android-приложение для создания цифровых визиток с QR-кодом в формате vCard 3.0. При сканировании QR-кода стандартной камерой iPhone или Android контакт сохраняется в телефон с всеми указанными соцсетями, мессенджерами и контактными данными.
 
-Приложение поддерживает регистрацию через email, хранение профилей в Firebase, мультиязычный интерфейс (RU/EN/ZH/JA/KO), тёмную тему, генерацию PDF и экспорт .vcf файлов. В корпоративной версии доступна админ-панель для отслеживания статистики сканирований по сотрудникам и компаниям.
+**QR Card Pro** — современное Android-приложение для создания цифровых визиток с QR-кодом. Вместо бумажных карточек вы создаёте электронную визитку, которую можно мгновенно сохранить в телефон любого человека — достаточно отсканировать QR-код стандартной камерой iPhone или Android.
+
+При сканировании контакт автоматически добавляется в телефонную книгу со всеми вашими данными: имя, должность, компания, телефон, email, ссылки на соцсети и мессенджеры.
 
 ### English
-**QR Card Pro** — an Android app for creating digital business cards with QR codes in vCard 3.0 format. When scanned with a standard iPhone or Android camera, the contact is saved to the phone with all specified social networks, messengers, and contact details.
 
-The app supports email registration, profile storage in Firebase, multilingual interface (RU/EN/ZH/JA/KO), dark theme, PDF generation, and .vcf export. The enterprise version includes an admin dashboard to track scan statistics by employee and company.
+**QR Card Pro** — a modern Android app for creating digital business cards with QR codes. Instead of paper cards, you create an electronic business card that can be instantly saved to anyone's phone — just scan the QR code with a standard iPhone or Android camera.
+
+Upon scanning, the contact is automatically added to the phone book with all your details: name, position, company, phone, email, links to social networks and messengers.
 
 ---
 
 ## ✨ Возможности / Features
 
 ### Русский
-- 📇 Генерация QR-кода в формате vCard 3.0 (сохранение контакта в телефон iOS/Android)
-- 🌐 25+ соцсетей: международные, российские, китайские, японские, корейские
-- 🔐 Регистрация и вход через email (Firebase Auth)
-- ☁️ Хранение профилей в Firestore с автосохранением
-- 📷 Встроенный сканер QR (CameraX + ML Kit)
-- 📄 Экспорт визитки в PDF
-- 📤 Экспорт .vcf файла и шаринг QR-картинки
-- 🌍 Мультиязычность: RU / EN / ZH / JA / KO
-- 🌙 Тёмная тема (светлая / тёмная / системная)
-- 🔄 Dynamic QR (ссылка на веб-карточку, редактируемая после печати)
-- 📱 NFC-передача визитки (Android)
-- 📊 Аналитика сканирований (кто, когда, что нажал)
-- 🏢 Корпоративная версия: команды, компании, админ-панель для начальства
-- 🎨 Дизайн QR: логотип в центре, цвета, рамки
-- 🔒 Биометрическая блокировка (заготовка)
+
+| Возможность | Описание |
+|-------------|----------|
+| 📇 **vCard QR-код** | Генерация QR-кода в стандартном формате vCard 3.0. Контакт сохраняется в телефон нативно — без установки дополнительных приложений. |
+| 🌐 **25+ соцсетей** | Международные (Telegram, WhatsApp, LinkedIn, Instagram, Facebook, X), российские (VK, OK, TenChat, Дзен, Rutube, Yappy, MAX), китайские (WeChat, Weibo, Douyin, Xiaohongshu, QQ, Bilibili), японские (LINE), корейские (KakaoTalk). |
+| 📱 **Сканер QR** | Встроенный сканер для чтения чужих визиток и контактов через камеру. |
+| 📄 **Экспорт в PDF** | Создание красивой визитки в формате PDF для печати или отправки. |
+| 📤 **Экспорт .vcf** | Сохранение визитки в стандартный файл контакта .vcf и шаринг через любую функцию «Поделиться». |
+| 🌍 **Мультиязычность** | Интерфейс на русском, английском, китайском, японском и корейском языках. |
+| 🌙 **Тёмная тема** | Светлая, тёмная и системная тема оформления. |
+| 🔄 **Dynamic QR** | Динамический QR-код: ссылка на веб-карточку, которую можно редактировать даже после печати. |
+| 📊 **Аналитика сканирований** | Статистика: кто сканировал вашу визитку, когда и на какие ссылки нажимал. |
+| 🎨 **Дизайн QR** | Логотип в центре QR-кода, выбор цветов и рамок. |
+| 🔒 **Биометрия** | Защита приложения отпечатком пальца или лицом. |
 
 ### English
-- 📇 vCard 3.0 QR generation (save contact to iPhone/Android phone)
-- 🌐 25+ social networks: international, Russian, Chinese, Japanese, Korean
-- 🔐 Email sign-in/sign-up (Firebase Auth)
-- ☁️ Profile storage in Firestore with auto-save
-- 📷 Built-in QR scanner (CameraX + ML Kit)
-- 📄 PDF business card export
-- 📤 .vcf file export and QR image sharing
-- 🌍 Multilingual: RU / EN / ZH / JA / KO
-- 🌙 Dark theme (light / dark / system)
-- 🔄 Dynamic QR (web link card, editable after printing)
-- 📱 NFC business card transfer (Android)
-- 📊 Scan analytics (who, when, what action)
-- 🏢 Enterprise version: teams, companies, admin dashboard for management
-- 🎨 QR design: logo in center, colors, frames
-- 🔒 Biometric lock (placeholder)
+
+| Feature | Description |
+|---------|-------------|
+| 📇 **vCard QR Code** | Generate QR codes in standard vCard 3.0 format. Contact saves natively to the phone — no extra apps required. |
+| 🌐 **25+ Social Networks** | International (Telegram, WhatsApp, LinkedIn, Instagram, Facebook, X), Russian (VK, OK, TenChat, Dzen, Rutube, Yappy, MAX), Chinese (WeChat, Weibo, Douyin, Xiaohongshu, QQ, Bilibili), Japanese (LINE), Korean (KakaoTalk). |
+| 📱 **QR Scanner** | Built-in scanner to read other people's business cards and contacts via camera. |
+| 📄 **PDF Export** | Create a beautiful business card in PDF format for printing or sharing. |
+| 📤 **.vcf Export** | Save business card as a standard .vcf contact file and share via any "Share" function. |
+| 🌍 **Multilingual** | Interface in Russian, English, Chinese, Japanese and Korean. |
+| 🌙 **Dark Theme** | Light, dark and system theme modes. |
+| 🔄 **Dynamic QR** | Dynamic QR code: a web card link that can be edited even after printing. |
+| 📊 **Scan Analytics** | Statistics: who scanned your card, when and which links they clicked. |
+| 🎨 **QR Design** | Logo in the center of the QR code, color and frame selection. |
+| 🔒 **Biometrics** | App protection with fingerprint or face ID. |
 
 ---
 
-## 🛠 Технологический стек / Tech Stack
-
-| Компонент | Решение |
-|-----------|---------|
-| Язык / Language | Kotlin |
-| UI | Jetpack Compose + Material 3 |
-| Бэкенд / Backend | Firebase Auth + Firestore |
-| Генерация QR | ZXing (`com.google.zxing:core:3.5.2`) |
-| Сканирование QR | Google ML Kit Barcode Scanning |
-| Камера | CameraX (camera-camera2, camera-lifecycle, camera-view) |
-| Изображения | Coil |
-| PDF | Android `PdfDocument` |
-| NFC | Android NDEF |
-| Локализация | Android `strings.xml` + `LanguageManager` |
-| Тема | `AppCompatDelegate` (Light/Dark/System) |
-
----
-
-## 📁 Структура проекта / Project Structure
-
-```
-QRCardPro/
-├── app/
-│   ├── build.gradle.kts
-│   ├── proguard-rules.pro
-│   └── src/main/
-│       ├── AndroidManifest.xml
-│       ├── java/com/example/digitalcardenterprise/
-│       │   ├── MainActivity.kt
-│       │   ├── data/
-│       │   │   ├── UserProfile.kt
-│       │   │   ├── Company.kt
-│       │   │   └── ScanEvent.kt
-│       │   ├── util/
-│       │   │   ├── VCardGenerator.kt
-│       │   │   ├── QrGenerator.kt
-│       │   │   ├── ImageHelper.kt
-│       │   │   ├── PdfExporter.kt
-│       │   │   ├── LanguageManager.kt
-│       │   │   ├── ThemeManager.kt
-│       │   │   ├── AnalyticsManager.kt
-│       │   │   ├── DynamicQrManager.kt
-│       │   │   └── WalletPassManager.kt
-│       │   ├── ui/
-│       │   │   ├── auth/AuthScreen.kt
-│       │   │   ├── profile/ProfileScreen.kt
-│       │   │   ├── qr/QrScreen.kt
-│       │   │   ├── scanner/ScannerScreen.kt
-│       │   │   ├── settings/SettingsScreen.kt
-│       │   │   ├── navigation/AppNavigation.kt
-│       │   │   └── admin/
-│       │   │       ├── AdminScreen.kt
-│       │   │       └── IconsAdmin.kt
-│       │   └── res/
-│       │       ├── values/strings.xml (EN)
-│       │       ├── values-ru/strings.xml (RU)
-│       │       ├── values-zh/strings.xml (ZH)
-│       │       ├── values/themes.xml
-│       │       ├── values-night/themes.xml
-│       │       └── xml/file_paths.xml
-│       └── res/
-├── build.gradle.kts
-├── settings.gradle.kts
-├── gradle.properties
-├── README.md
-├── build_apk.sh
-└── build_aab.sh
-```
-
----
-
-## 🛠 Установка и запуск / Installation & Run
+## 📦 Версии приложения / App Versions
 
 ### Русский
 
-1. Установите [Android Studio](https://developer.android.com/studio)
-2. Склонируйте репозиторий:
-   ```bash
-   git clone https://github.com/mashslamma/Dev.git
-    cd Dev/QRCardPro
-   ```
-3. Создайте проект в [Firebase Console](https://console.firebase.google.com)
-4. Добавьте Android-приложение с пакетом `com.example.digitalcardenterprise`
-5. Скачайте `google-services.json` и положите в папку `app/`
-6. В консоли Firebase включите:
-   - **Authentication → Sign-in method → Email/Password**
-   - **Firestore Database → Create database → Test mode**
-7. Откройте проект в Android Studio → **File → Sync Project with Gradle Files**
-8. Запустите на эмуляторе или устройстве: ▶ **Run**
+| | **Бесплатная** | **Pro** | **Enterprise** |
+|---|---|---|---|
+| **Цена** | 0 ₽ / месяц | 9 ₽ / месяц | Индивидуально |
+| **Одна визитка** | ✅ | ✅ | ✅ |
+| **Несколько визиток** | ❌ | ✅ | ✅ |
+| **25+ соцсетей** | ✅ | ✅ | ✅ |
+| **Экспорт PDF и .vcf** | ✅ | ✅ | ✅ |
+| **Сканер QR** | ✅ | ✅ | ✅ |
+| **Динамический QR** | ❌ | ✅ | ✅ |
+| **Дизайн QR (логотип, цвета)** | ❌ | ✅ | ✅ |
+| **Аналитика сканирований** | Базовая | Расширенная | Полная с отчётами |
+| **Команды и компании** | ❌ | ❌ | ✅ |
+| **Админ-панель для начальства** | ❌ | ❌ | ✅ |
+| **Статистика звонков по корп. телефону** | ❌ | ❌ | ✅ |
+| **Приоритетная поддержка** | ❌ | ❌ | ✅ |
+
+**Бесплатная версия** — для частных лиц и фрилансеров. Создавайте одну визитку, делитесь ею через QR и сохраняйте контакты.
+
+**Pro версия** — для профессионалов и pequenos бизнеса. Несколько визиток, динамический QR (изменяйте данные после печати), кастомизация дизайна и расширенная аналитика.
+
+**Enterprise версия** — для компаний и корпораций. Админ-панель для руководства: отслеживайте, сколько клиентов воспользовались визиткой сотрудников, звонили по корпоративному телефону, сохраняли контакты. Управляйте командами, ролями и брендингом компании.
 
 ### English
 
-1. Install [Android Studio](https://developer.android.com/studio)
-2. Clone the repository:
-   ```bash
-   git clone https://github.com/mashslamma/Dev.git
-    cd Dev/QRCardPro
-   ```
-3. Create a project in [Firebase Console](https://console.firebase.google.com)
-4. Add an Android app with package `com.example.digitalcardenterprise`
-5. Download `google-services.json` and place it in the `app/` folder
-6. In the Firebase console enable:
-   - **Authentication → Sign-in method → Email/Password**
-   - **Firestore Database → Create database → Test mode**
-7. Open the project in Android Studio → **File → Sync Project with Gradle Files**
-8. Run on emulator or device: ▶ **Run**
+| | **Free** | **Pro** | **Enterprise** |
+|---|---|---|---|
+| **Price** | $0 / month | $9 / month | Custom |
+| **One business card** | ✅ | ✅ | ✅ |
+| **Multiple business cards** | ❌ | ✅ | ✅ |
+| **25+ social networks** | ✅ | ✅ | ✅ |
+| **PDF and .vcf export** | ✅ | ✅ | ✅ |
+| **QR scanner** | ✅ | ✅ | ✅ |
+| **Dynamic QR** | ❌ | ✅ | ✅ |
+| **QR design (logo, colors)** | ❌ | ✅ | ✅ |
+| **Scan analytics** | Basic | Advanced | Full with reports |
+| **Teams and companies** | ❌ | ❌ | ✅ |
+| **Admin dashboard for management** | ❌ | ❌ | ✅ |
+| **Corporate phone call statistics** | ❌ | ❌ | ✅ |
+| **Priority support** | ❌ | ❌ | ✅ |
+
+**Free version** — for individuals and freelancers. Create one business card, share via QR and save contacts.
+
+**Pro version** — for professionals and small businesses. Multiple business cards, dynamic QR (change data after printing), design customization and advanced analytics.
+
+**Enterprise version** — for companies and corporations. Admin dashboard for management: track how many clients used employee business cards, called corporate phones, saved contacts. Manage teams, roles and company branding.
 
 ---
 
-## 🔥 Настройка Firebase / Firebase Setup
+## 🎯 Для кого приложение / Who is it for
 
 ### Русский
 
-Правила доступа Firestore (режим тестирования для разработки):
-
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-```
+- **Фрилансеры и индивидуальные предприниматели** — быстро обменивайтесь контактами на встречах и конференциях.
+- **Продавцы и менеджеры по продажам** — делитесь визиткой с клиентами, чтобы они могли мгновенно сохранить все способы связи.
+- **Сотрудники компаний** — unified цифровой образ компании с корпоративными контактами.
+- **Владельцы бизнеса** — отслеживайте эффективность нетворкинга команды через админ-панель.
 
 ### English
 
-Firestore security rules (test mode for development):
-
-```
-rules_version = '2';
-service cloud.firestore {
-  match /databases/{database}/documents {
-    match /{document=**} {
-      allow read, write: if request.auth != null;
-    }
-  }
-}
-```
-
----
-
-## 📦 Сборка и релиз / Build & Release
-
-### Русский
-
-**Debug APK:**
-```bash
-./gradlew assembleDebug
-# APK: app/build/outputs/apk/debug/app-debug.apk
-```
-
-**Release AAB (для Google Play):**
-```bash
-./gradlew bundleRelease
-# AAB: app/build/outputs/bundle/release/app-release.aab
-```
-
-Для релиза в Google Play необходим аккаунт разработчика ($25 единоразово) и подписанный AAB-файл.
-
-### English
-
-**Debug APK:**
-```bash
-./gradlew assembleDebug
-# APK: app/build/outputs/apk/debug/app-debug.apk
-```
-
-**Release AAB (for Google Play):**
-```bash
-./gradlew bundleRelease
-# AAB: app/build/outputs/bundle/release/app-release.aab
-```
-
-For Google Play release you need a developer account ($25 one-time) and a signed AAB file.
-
----
-
-## 🏢 Корпоративная версия / Enterprise Version
-
-### Русский
-
-Корпоративная версия предназначена для компаний, которым нужно отслеживать эффективность цифровых визиток сотрудников.
-
-**Возможности для администратора:**
-- Подключение сотрудников к компании через `companyId`
-- Статистика сканирований: общее количество, звонки по корпоративному телефону, шаринги, сохранения контактов
-- Экспорт отчётов
-- Управление ролями (admin / member)
-
-**Схема Firestore:**
-- `/users/{uid}` — профиль сотрудника с полем `companyId` и `role`
-- `/companies/{companyId}` — данные компании
-- `/scans/{scanId}` — события сканирования (кто, когда, какое действие, на какую ссылку нажал)
-
-### English
-
-The enterprise version is designed for companies that need to track the effectiveness of employee digital business cards.
-
-**Admin capabilities:**
-- Connect employees to a company via `companyId`
-- Scan statistics: total scans, corporate phone calls, shares, contact saves
-- Report export
-- Role management (admin / member)
-
-**Firestore schema:**
-- `/users/{uid}` — employee profile with `companyId` and `role` fields
-- `/companies/{companyId}` — company data
-- `/scans/{scanId}` — scan events (who, when, what action, which link clicked)
+- **Freelancers and individual entrepreneurs** — quickly exchange contacts at meetings and conferences.
+- **Salespeople and sales managers** — share your business card with clients so they can instantly save all contact methods.
+- **Company employees** — unified digital company image with corporate contacts.
+- **Business owners** — track team networking effectiveness through the admin dashboard.
 
 ---
 
 ## 📄 Лицензия / License
 
-MIT License. Используйте freely для коммерческих и некоммерческих целей.
+MIT License. Используйте свободно для коммерческих и некоммерческих целей.
 
 MIT License. Free to use for commercial and non-commercial purposes.
 
 ---
 
-**Разработано с ❤️ для бизнеса и нетворкинга**  
-**Made with ❤️ for business and networking**
+**QR Card Pro** — ваша цифровая визитка всегда под рукой.
+
+**QR Card Pro** — your digital business card always at hand.
