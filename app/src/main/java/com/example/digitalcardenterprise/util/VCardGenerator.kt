@@ -3,6 +3,8 @@
 import com.example.digitalcardenterprise.data.UserProfile
 
 object VCardGenerator {
+    private const val MAX_VCARD_SIZE = 2500
+
     fun generate(p: UserProfile): String {
         val lines = mutableListOf<String>()
         lines += "BEGIN:VCARD"
@@ -36,7 +38,8 @@ object VCardGenerator {
         addUrl(lines, p.bilibili, "https://space.bilibili.com/", null)
         addUrl(lines, p.line, "https://line.me/ti/p/", null)
         addUrl(lines, p.kakao, "https://kakao.com/", null)
-        if (p.dynamicCardId.isNotBlank()) lines += "URL:https://card.digitalcardenterprise.com/${p.dynamicCardId}"
+        if (p.dynamicCardId.isNotBlank()) lines += "URL:https://card.qrcardpro.com/${p.dynamicCardId}"
+
         val note = buildString {
             fun line(label: String, value: String) { if (value.isNotBlank()) append("$label: $value\n") }
             line("Telegram", p.telegram); line("WhatsApp", p.whatsapp); line("VK", p.vk); line("OK", p.ok)
@@ -48,8 +51,20 @@ object VCardGenerator {
         if (note.isNotBlank()) lines += "NOTE:${esc(note.trim())}"
         if (p.photoBase64.isNotBlank()) lines += "PHOTO;ENCODING=b;TYPE=JPEG:${p.photoBase64}"
         lines += "END:VCARD"
-        return lines.joinToString("\r\n") + "\r\n"
+        val result = lines.joinToString("\r\n") + "\r\n"
+
+        // Если vCard больше безопасного лимита, убираем фото и редкие поля
+        if (result.toByteArray(Charsets.UTF_8).size > MAX_VCARD_SIZE) {
+            return generateWithoutPhoto(p)
+        }
+        return result
     }
+
+    private fun generateWithoutPhoto(p: UserProfile): String {
+        val profileWithoutPhoto = p.copy(photoBase64 = "")
+        return generate(profileWithoutPhoto)
+    }
+
     private fun addUrl(lines: MutableList<String>, value: String, prefix: String, iosType: String?) {
         if (value.isBlank()) return
         val url = urlOrPrefix(value, prefix)

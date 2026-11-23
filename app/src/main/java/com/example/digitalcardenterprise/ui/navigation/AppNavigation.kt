@@ -43,19 +43,28 @@ fun AppNav() {
     var user by remember { mutableStateOf<FirebaseUser?>(auth.currentUser) }
     var profile by remember { mutableStateOf<UserProfile?>(null) }
 
+    var profileListener by remember { mutableStateOf<com.google.firebase.firestore.ListenerRegistration?>(null) }
+
     DisposableEffect(auth) {
         val listener = FirebaseAuth.AuthStateListener { user = it.currentUser }
         auth.addAuthStateListener(listener)
-        onDispose { auth.removeAuthStateListener(listener) }
+        onDispose {
+            auth.removeAuthStateListener(listener)
+            profileListener?.remove()
+        }
     }
 
     LaunchedEffect(user?.uid) {
         val current = user
+        profileListener?.remove()
+        profileListener = null
+
         if (current == null) {
-            profile = null; nav.navigate(Routes.AUTH) { popUpTo(nav.graph.id) { inclusive = true } }
+            profile = null
+            nav.navigate(Routes.AUTH) { popUpTo(nav.graph.id) { inclusive = true } }
         } else {
             val uid = current.uid
-            db.collection("users").document(uid).addSnapshotListener { snap, _ ->
+            profileListener = db.collection("users").document(uid).addSnapshotListener { snap, _ ->
                 val loaded = snap?.toObject(UserProfile::class.java) ?: UserProfile(uid = uid, email = current.email ?: "")
                 profile = loaded.copy(uid = uid, email = if (loaded.email.isBlank()) current.email ?: "" else loaded.email)
             }

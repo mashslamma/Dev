@@ -1,5 +1,8 @@
 ﻿package com.example.digitalcardenterprise.data
 
+import androidx.compose.runtime.Stable
+
+@Stable
 data class UserProfile(
     val uid: String = "",
     val firstName: String = "",
