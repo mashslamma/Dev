@@ -1,0 +1,5 @@
+﻿-keepattributes *Annotation*
+-keep class com.example.digitalcardenterprise.data.** { *; }
+-keep class com.google.zxing.** { *; }
+-keep class com.google.mlkit.** { *; }
+-dontwarn com.google.firebase.**
