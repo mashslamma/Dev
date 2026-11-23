@@ -1,8 +1,6 @@
 ﻿package com.example.digitalcardenterprise.util
 
-import android.app.Activity
 import android.content.Context
-import android.content.res.Configuration
 import java.util.Locale
 
 object LanguageManager {
@@ -24,17 +22,6 @@ object LanguageManager {
             .edit()
             .putString("language_code", lang.code)
             .apply()
-        val locale = Locale(lang.code)
-        Locale.setDefault(locale)
-        val config = Configuration(context.resources.configuration)
-        config.setLocale(locale)
-        @Suppress("DEPRECATION")
-        context.resources.updateConfiguration(config, context.resources.displayMetrics)
-    }
-
-    fun recreate(activity: Activity, lang: Lang) {
-        apply(activity, lang)
-        activity.recreate()
     }
 
     private fun defaultLang(): Lang {

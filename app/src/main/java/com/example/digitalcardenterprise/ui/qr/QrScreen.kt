@@ -19,6 +19,7 @@ import com.example.digitalcardenterprise.R
 import com.example.digitalcardenterprise.data.UserProfile
 import com.example.digitalcardenterprise.util.ImageHelper
 import com.example.digitalcardenterprise.util.PdfExporter
+import com.example.digitalcardenterprise.util.QrCache
 import com.example.digitalcardenterprise.util.QrGenerator
 import com.example.digitalcardenterprise.util.VCardGenerator
 
@@ -27,12 +28,22 @@ import com.example.digitalcardenterprise.util.VCardGenerator
 fun QrScreen(profile: UserProfile, onBack: () -> Unit) {
     val context = LocalContext.current
     val vcard = remember(profile) { VCardGenerator.generate(profile) }
-    val qrBitmap = remember(vcard) { QrGenerator.generate(vcard) }
+    val cacheKey = remember { "${profile.uid}_${vcard.hashCode()}" }
+
+    val qrBitmap = remember(cacheKey) {
+        QrCache.get(cacheKey)?.let { cached ->
+            cached
+        } ?: run {
+            val generated = QrGenerator.generate(vcard)
+            generated?.let { QrCache.put(cacheKey, it) }
+            generated
+        }
+    }
 
     Scaffold(topBar = { TopAppBar(title = { Text(stringResource(R.string.qr_title)) }, navigationIcon = { IconButton(onClick = onBack) { Icon(Icons.Default.ArrowBack, null) } }) }) { padding ->
         Column(modifier = Modifier.fillMaxSize().padding(padding).padding(24.dp), horizontalAlignment = Alignment.CenterHorizontally) {
             Text(text = "${profile.firstName} ${profile.lastName}".trim(), style = MaterialTheme.typography.headlineSmall)
-            if (profile.position.isNotBlank() || profile.company.isNotBlank()) Text(text = listOf(profile.position, profile.company).filter { it.isNotBlank() }.joinToString(" вЂў "), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            if (profile.position.isNotBlank() || profile.company.isNotBlank()) Text(text = listOf(profile.position, profile.company).filter { it.isNotBlank() }.joinToString(" • "), style = MaterialTheme.typography.bodyMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
             Spacer(Modifier.height(24.dp))
             if (qrBitmap != null) {
                 Card { Image(qrBitmap.asImageBitmap(), null, Modifier.size(300.dp).padding(12.dp)) }

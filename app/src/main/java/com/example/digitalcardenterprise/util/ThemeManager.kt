@@ -1,6 +1,5 @@
 ﻿package com.example.digitalcardenterprise.util
 
-import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 
@@ -15,22 +14,14 @@ object ThemeManager {
     }
 
     fun getSaved(context: Context): Mode {
-        val code = context
-            .getSharedPreferences(PREFS, Context.MODE_PRIVATE)
-            .getString(KEY, null)
+        val code = context.getSharedPreferences(PREFS, Context.MODE_PRIVATE).getString(KEY, null)
         return Mode.values().firstOrNull { it.name == code } ?: Mode.SYSTEM
     }
 
     fun apply(context: Context, mode: Mode) {
-        context
-            .getSharedPreferences(PREFS, Context.MODE_PRIVATE)
+        context.getSharedPreferences(PREFS, Context.MODE_PRIVATE)
             .edit()
             .putString(KEY, mode.name)
             .apply()
-    }
-
-    fun recreate(activity: Activity, mode: Mode) {
-        apply(activity, mode)
-        activity.recreate()
     }
 }
