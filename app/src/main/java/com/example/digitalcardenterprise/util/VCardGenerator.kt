@@ -7,7 +7,7 @@ object VCardGenerator {
         val lines = mutableListOf<String>()
         lines += "BEGIN:VCARD"
         lines += "VERSION:3.0"
-        lines += "PRODID:-//DigitalCardEnterprise//EN"
+        lines += "PRODID:-//QRCardPro//EN"
         lines += "N:${esc(p.lastName)};${esc(p.firstName)};;;"
         lines += "FN:${esc((p.firstName + " " + p.lastName).trim())}"
         if (p.company.isNotBlank()) lines += "ORG:${esc(p.company)}"

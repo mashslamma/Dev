@@ -1,4 +1,4 @@
-# Digital Card Enterprise — Цифровая визитка для компаний
+# QR Card Pro — Цифровая визитка для компаний
 
 ## 📖 Оглавление / Table of Contents
 
@@ -19,12 +19,12 @@
 ## 🚀 О проекте / About
 
 ### Русский
-**Digital Card Enterprise** — Android-приложение для создания цифровых визиток с QR-кодом в формате vCard 3.0. При сканировании QR-кода стандартной камерой iPhone или Android контакт сохраняется в телефон с всеми указанными соцсетями, мессенджерами и контактными данными.
+**QR Card Pro** — Android-приложение для создания цифровых визиток с QR-кодом в формате vCard 3.0. При сканировании QR-кода стандартной камерой iPhone или Android контакт сохраняется в телефон с всеми указанными соцсетями, мессенджерами и контактными данными.
 
 Приложение поддерживает регистрацию через email, хранение профилей в Firebase, мультиязычный интерфейс (RU/EN/ZH/JA/KO), тёмную тему, генерацию PDF и экспорт .vcf файлов. В корпоративной версии доступна админ-панель для отслеживания статистики сканирований по сотрудникам и компаниям.
 
 ### English
-**Digital Card Enterprise** — an Android app for creating digital business cards with QR codes in vCard 3.0 format. When scanned with a standard iPhone or Android camera, the contact is saved to the phone with all specified social networks, messengers, and contact details.
+**QR Card Pro** — an Android app for creating digital business cards with QR codes in vCard 3.0 format. When scanned with a standard iPhone or Android camera, the contact is saved to the phone with all specified social networks, messengers, and contact details.
 
 The app supports email registration, profile storage in Firebase, multilingual interface (RU/EN/ZH/JA/KO), dark theme, PDF generation, and .vcf export. The enterprise version includes an admin dashboard to track scan statistics by employee and company.
 
@@ -89,7 +89,7 @@ The app supports email registration, profile storage in Firebase, multilingual i
 ## 📁 Структура проекта / Project Structure
 
 ```
-DigitalCardEnterprise/
+QRCardPro/
 ├── app/
 │   ├── build.gradle.kts
 │   ├── proguard-rules.pro
@@ -147,7 +147,7 @@ DigitalCardEnterprise/
 2. Склонируйте репозиторий:
    ```bash
    git clone https://github.com/mashslamma/Dev.git
-   cd Dev/DigitalCardEnterprise
+    cd Dev/QRCardPro
    ```
 3. Создайте проект в [Firebase Console](https://console.firebase.google.com)
 4. Добавьте Android-приложение с пакетом `com.example.digitalcardenterprise`
@@ -164,7 +164,7 @@ DigitalCardEnterprise/
 2. Clone the repository:
    ```bash
    git clone https://github.com/mashslamma/Dev.git
-   cd Dev/DigitalCardEnterprise
+    cd Dev/QRCardPro
    ```
 3. Create a project in [Firebase Console](https://console.firebase.google.com)
 4. Add an Android app with package `com.example.digitalcardenterprise`

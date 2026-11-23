@@ -12,5 +12,5 @@ dependencyResolutionManagement {
         mavenCentral()
     }
 }
-rootProject.name = "DigitalCardEnterprise"
+rootProject.name = "QRCardPro"
 include(":app")

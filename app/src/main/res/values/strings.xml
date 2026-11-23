@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">Digital Card Enterprise</string>
+    <string name="app_name">QR Card Pro</string>
     <string name="auth_title">Digital Business Card</string>
     <string name="auth_email">Email</string>
     <string name="auth_password">Password</string>
